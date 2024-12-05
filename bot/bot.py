@@ -3,7 +3,6 @@ import asyncio
 import time
 
 from telegram.ext import *
-from dotenv import load_dotenv
 from telegram import Update, constants
 from datetime import datetime, timezone
 
@@ -11,12 +10,11 @@ from bot.handlers.sendScheduled import jobSendScheduled
 from bot.handlers import exportedHandlers, handleErrors, middleware
 from bot.utils import getArguments
 
-# Load Environment Variables
-load_dotenv()
 
+# Set your bot token directly here
+TOKEN = "your_bot_token_here"
 
-LOCAL = os.environ.get("LOCAL") or getArguments().ARG_LOCAL
-TOKEN = os.environ.get("TOKEN") if not LOCAL else os.environ.get("TEST")
+LOCAL = False  # Set to True if you want to test with a local bot token
 
 def runBot(token):
     df = Defaults(parse_mode=constants.ParseMode.HTML, block=False, quote=True)
@@ -56,7 +54,7 @@ def runBot(token):
 
 def startBot():
     if not TOKEN:
-        print("Please put your bot token in `.env` file")
+        print("Please provide your bot token in the script.")
         exit()
         return
 
