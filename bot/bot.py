@@ -12,7 +12,7 @@ from bot.utils import getArguments
 
 
 # Set your bot token directly here
-TOKEN = "your_bot_token_here"
+TOKEN = "7999319004:AAGLbFSvmhsdZbF13tsBK99yjsIG3Pvm_tE"
 
 LOCAL = False  # Set to True if you want to test with a local bot token
 
