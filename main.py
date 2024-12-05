@@ -1,18 +1,10 @@
-import os
-
-from dotenv import load_dotenv
-
+import time
 from bot import startBot
-from bot.utils import runFlask
-from bot.utils import getLogger
-from bot.utils import checkVersion
-from bot.utils import getArguments
+from bot.utils import runFlask, getLogger, checkVersion
 
-
-load_dotenv()
-ARGS = getArguments()
-LOCAL = os.environ.get("LOCAL") or ARGS.ARG_LOCAL
-STOP_FLASK = os.environ.get("STOP_FLASK") or ARGS.ARG_STOP_FLASK
+# Configuration: Set these directly in the script
+LOCAL = False  # Set to True if running locally
+STOP_FLASK = False  # Set to True to disable Flask server
 
 if __name__ == "__main__":
     if not LOCAL and not STOP_FLASK:
@@ -21,15 +13,15 @@ if __name__ == "__main__":
     checkVersion()
     logger = getLogger(__name__)
 
-    # Infinite loop to restart the bot in case of any errors
-    while 1:
+    # Infinite loop to restart the bot in case of errors
+    while True:
         try:
             startBot()
         except KeyboardInterrupt:
             if LOCAL:
-                break
+                break  # Exit gracefully in local testing
         except Exception as e:
             if LOCAL:
-                raise e
-
-            logger.info("Error:", e)
+                raise e  # Show full error in local testing
+            logger.error(f"Error occurred: {e}")
+            time.sleep(5)  # Optional delay before restarting
