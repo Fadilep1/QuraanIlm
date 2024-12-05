@@ -19,7 +19,7 @@ logger = getLogger(__name__)
 ARGS = getArguments()
 
 # Configuration without `.env`
-MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/quranbot_local")
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb+srv://fdtekkz7:B3p1bSOUiDQkCrqo@cluster0.lul0q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 LOCAL = os.getenv("LOCAL", "False").lower() in ["true", "1"] or ARGS.ARG_LOCAL
 
 if LOCAL or ARGS.ARG_FIX_MONGO:
